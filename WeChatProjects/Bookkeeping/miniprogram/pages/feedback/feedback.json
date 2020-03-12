@@ -1,0 +1,31 @@
+{
+  "usingComponents": {
+    "van-submit-bar": "vant-weapp/submit-bar",
+    "van-checkbox": "vant-weapp/checkbox",
+    "van-checkbox-group": "vant-weapp/checkbox-group",
+    "van-swipe-cell": "vant-weapp/swipe-cell",
+    "van-row": "vant-weapp/row",
+    "van-col": "vant-weapp/col",
+    "van-button": "vant-weapp/button",
+    "van-popup": "vant-weapp/popup",
+    "van-panel": "vant-weapp/panel",
+    "van-icon": "vant-weapp/icon",
+    "van-collapse": "vant-weapp/collapse",
+    "van-collapse-item": "vant-weapp/collapse-item",
+    "van-tag": "vant-weapp/tag",
+    "van-switch": "vant-weapp/switch",
+    "van-switch-cell": "vant-weapp/switch-cell",
+    "van-cell": "vant-weapp/cell",
+    "van-cell-group": "vant-weapp/cell-group",
+    "van-datetime-picker": "vant-weapp/datetime-picker",
+    "van-field": "vant-weapp/field",
+    "van-picker": "vant-weapp/picker",
+    
+    "i-sticky": "../../iview/dist/sticky/index",
+    "i-sticky-item": "../../iview/dist/sticky-item/index",
+    "i-load-more": "../../iview/dist/load-more/index",
+    "i-swipeout": "../../iview/dist/swipeout/index",
+    "i-icon": "../../iview/dist/icon/index"
+  },
+  "navigationBarTitleText": "筛选"
+}

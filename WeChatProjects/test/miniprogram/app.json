@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/base/base",
+    "pages/cloud/cloud"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "入门小程序",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#ccc",
+    "selectedColor": "#000000",
+    "list": [{
+      "pagePath": "pages/base/base",
+      "text": "基础",
+      "iconPath": "images/base/base.png",
+      "selectedIconPath": "images/base/base-active.png"
+    },
+    {
+      "pagePath": "pages/cloud/cloud",
+      "text": "云开发",
+      "iconPath": "images/cloud/cloud.png",
+      "selectedIconPath": "images/cloud/cloud-active.png"
+    }]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,7 @@
+<!--miniprogram/pages/index/index.wxml-->
+
+
+<view class="empty_tip " style='background-color:#1989FA;'>
+
+  <button style="margin-top:888rpx; color:white;background-color:#FF4444;border:white solid 1px;" open-type='getUserInfo' bindgetuserinfo="onGetUserInfo">开启我的账本</button>
+</view>

@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/zhangben/zhangben",
+    "pages/shezhi/shezhi",
+    "pages/morezhangdan/morezhangdan",
+    "pages/index/index",
+    "pages/feedback/feedback"
+  ],
+  "window": {
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#dbdbdb",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1989fa",
+    "navigationBarTitleText": "区区记账本",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#ccc",
+    "selectedColor": "#333",
+    "list": [
+      {
+        "pagePath": "pages/zhangben/zhangben",
+        "text": "账本",
+        "iconPath": "images/zhangben.png",
+        "selectedIconPath": "images/zhangben-act.png"
+      },
+      {
+        "pagePath": "pages/shezhi/shezhi",
+        "text": "中心",
+        "iconPath": "images/shezhi.png",
+        "selectedIconPath": "images/shezhi-act.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

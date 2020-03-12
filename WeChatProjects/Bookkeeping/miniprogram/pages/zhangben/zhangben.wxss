@@ -1,0 +1,106 @@
+/* miniprogram/pages/zhangben/zhangben.wxss */
+@import "../../app.wxss";
+.cycleBtn-add {
+  position: fixed;
+  width: 140rpx;
+  height: 140rpx;
+  bottom: 58rpx;
+  right: 58rpx;
+  border-radius: 50%;
+  border: 2rpx solid #fff;
+  background: #1989fa;
+}
+.cycleBtn-icon {
+  display: block;
+  margin: 10px 0.5px 0.5px 10px;
+  wxcs_style_margin: 20rpx 0rpx 0rpx 20rpx;
+}
+
+.month-header{
+  font-size: 30rpx;
+  color: #fff;
+  background: #1989FA;
+  height: 88rpx;
+  line-height: 88rpx;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx;
+}
+
+.day-header{
+  font-size: 24rpx;
+  color: #000;
+  background: rgba(106, 177, 248, 0.863);
+  height: 50rpx;
+  line-height: 50rpx;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx;
+}
+
+.moneyFont{
+  font: 1.1rem solid;
+  color: #000;
+}
+
+.btndiv {
+  text-align: center;
+}
+
+.van-button--normal {
+  margin: 50rpx;
+}
+
+
+/*横向滚动样式*/
+.scroll-x{
+    height:80px;
+    white-space:nowrap;
+    display:flex;
+}
+/* 隐藏scrollbar */
+::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+.view-parent{
+    display:inline-block;
+}
+.view-item{
+    width:99rpx;
+    height:99rpx;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-color:#333;
+    background:#f4f4f4;
+    margin:10px;
+}
+/*横向滚动样式 :end*/
+
+
+.i-swipeout-demo-item{
+    border-bottom:#333 solid 1px;
+}
+.i-cell-padding{
+    padding:5px 0px!important;
+    font-size:14px;
+}
+.i-swipeout-demo-button-group{
+    height:100%;
+    width:100%;
+}
+.i-swipeout-demo-button{
+    width:70px;
+    float:left;
+    display: flex;
+    height:100%;
+    justify-content: center;
+    background:red;
+    color:#fff;
+    align-items:center;
+}

@@ -1,0 +1,13 @@
+<!--miniprogram/pages/index/index.wxml-->
+
+<view class="userinfo">
+  <view class="userinfo-avatar">
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+  <view type="font-size:28rpx">welcome~</view>
+</view>
+
+<van-steps steps="{{[{text: '1、当天的账单可以再首页修改，更多明细中的账单无法修改；',desc: '点击备注信息可以查看完整备注'},{text: '2、首页可以查看当月收支，点击“含欠款”可以查看欠款；',desc: '例如：XX信用卡~￥1200 '},{text: '3、更多明细中可以年、月查看账单列表；',desc: '点击备注信息可以查看完整备注'},{text: '4、个人中心设置中所有列表只能新增、或者删除；',desc: '要修改的话就先删除再新增吧 :-)'},{text: '5、账户资产-就是你自己的钱、信用资产-就是需要还的钱；',desc: '资产额度可以不用写，毕竟没有太多钱 :-) '}]}}"
+  active="{{ active }}" direction="vertical" active-color="#f44" />
+<button hidden="{{!hiddenGetUserBtn}}" bindtap="nextStep">下一步</button>
+<button hidden="{{hiddenGetUserBtn}}" style="color:white;background-color:#FF4444;border:white solid 1px;" open-type='getUserInfo' bindgetuserinfo="onGetUserInfo">开启我的账本</button>

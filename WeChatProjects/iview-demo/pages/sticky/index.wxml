@@ -1,0 +1,26 @@
+<view class="">
+  <i-sticky scrollTop="{{scrollTop}}">
+    <i-sticky-item i-class="i-sticky-title" wx:for="{{[1,2,3,4,5,6,7,8]}}" wx:key="{{index}}">
+      <view slot="title">
+        逻辑层
+      </view>
+      <view slot="content">
+        <view class="">
+
+          <i-swipeout i-class="i-swipeout-item" actions="{{[{name: '删除',color: '#ed3f14'}]}}">
+            <view slot="content">
+              <i-cell i-class="i-cell-padding" title="猛虫过江" label="侏罗纪世界主题公园及豪华度假村被失控的恐龙们摧毁已有四年">
+              </i-cell>
+            </view>
+          </i-swipeout>
+
+        </view>
+        <view class="">场景值</view>
+        <view class="">注册页面</view>
+        <view class=""></view>
+        <view class="">模块化</view>
+        <view class="">API</view>
+      </view>
+    </i-sticky-item>
+  </i-sticky>
+</view>

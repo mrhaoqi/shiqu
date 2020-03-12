@@ -1,0 +1,236 @@
+<!--miniprogram/pages/morezhangdan/morezhangdan.wxml-->
+<wxs module="m1">
+  var parseF = function(num) {
+    return parseFloat(num).toFixed(2);
+  }
+  module.exports.parseF = parseF;
+</wxs>
+<!-- ==============微信Script ↑============= -->
+<view bind:longpress=''>
+
+
+  <!-- 一个月 -->
+  <view class="everyMonth" wx:for="{{billList}}" wx:for-item="monthBill" wx:key="{{index}}">
+    <!-- 每月 -->
+    <view class="month-header">
+      <van-row>
+        <van-col span="6">
+          <text style="float:left;">{{monthBill.yearMonth}}</text>
+        </van-col>
+        <van-col span="18">
+          <text style="float:right;">支出￥{{monthBill.monthOutMoney}}，收入￥{{monthBill.monthInMoney}}</text>
+        </van-col>
+      </van-row>
+    </view>
+    <!-- 每天 -->
+    <view class="everyDay" wx:for="{{monthBill.monthBillList}}" wx:for-item="dayBill" wx:key="{{index}}">
+      <view class="day-header">
+        <van-row>
+          <van-col span="8">
+            <text style="float:right;">{{dayBill.monthDate}} {{dayBill.weekDay}}</text>
+          </van-col>
+          <van-col span="16">
+            <text style="float:right;">支出￥{{dayBill.dayOutMoney}}，收入￥{{dayBill.dayInMoney}}</text>
+          </van-col>
+        </van-row>
+      </view>
+      <!-- 记录 -->
+      <view class="everyBill" wx:for="{{dayBill.dayBillList}}" wx:key="{{index}}">
+        <i-swipeout i-class="i-swipeout-demo-item" operateWidth="{{60}}">
+          <view bindtap='openPopup' data-id="{{item._id}}" slot="content">
+            <van-row>
+              <van-col span="4">
+                <view>
+                  <van-tag color="{{item.billInOut=='收入'?'#f44':''}}" mark type="primary">{{item.billType}}</van-tag>
+                </view>
+              </van-col>
+              <van-col span="12">
+                <view class="bill-note" style='color:#333;font-size:30rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;'>{{item.billMark}}
+                  <view class="bill-datetime" style='margin-top:30rpx;font-size:24rpx;color:#999;'>{{dayBill.monthDate}} {{item.billTime}}</view>
+                </view>
+              </van-col>
+              <van-col span="8">
+                <view class="bill-money" style="font-size:30rpx;color:#000;text-align:right;vertical-align:middle;">
+                  <view>
+                    <van-tag color="{{item.billInOut=='收入'?'#f44':''}}" plain type="primary">{{item.billAccount}}</van-tag>
+                  </view>
+                  <!-- {{item.billInOut=='收入'?'#f44':'#1989FA'}} -->
+                  <view style="margin-top:20rpx; color:#333">{{item.billInOut=='收入'?'+':'-'}}{{item.billMoney}}</view>
+                </view>
+              </van-col>
+            </van-row>
+          </view>
+
+          <view slot="button" class="i-swipeout-demo-button-group" style="background:#2db7f5;">
+            <view class="i-swipeout-demo-button" style="width:60px" data-id="{{item._id}}" bindtap='onDeleteBill'>
+              <i-icon data-id="{{item._id}}" bindtap='onDeleteBill' size="32" type="trash_fill"></i-icon>
+            </view>
+          </view>
+        </i-swipeout>
+      </view>
+      <!-- 每一单记录 -->
+    </view>
+    <!-- 每天 -->
+  </view>
+  <!-- 一个月 -->
+
+
+</view>
+
+
+<!-- 过滤圆形按钮 -->
+<view hidden="{{hiddenFilterCycleBtn}}" bindtap='showFilterPage' style="font-size:28rpx;color:white;" class='cycleBtn-filter'>
+  <view style="margin-left:22rpx">
+    <van-icon custom-class="cycleBtn-icon" name="filter-o" size="1.5rem" color="white" />
+    <view style="margin-left:14rpx;">筛 选</view>
+  </view>
+</view>
+<!-- 新增圆形按钮 -->
+<!-- <view bindtap='tapAddBillBtn' style="font-size:28rpx;color:white;" class='cycleBtn-add'>
+  <view style="margin-left:22rpx">
+    <van-icon custom-class="cycleBtn-icon" name="plus" size="1.5rem" color="white" />
+    <view style="margin-left:8rpx;">记一笔</view>
+  </view>
+</view> -->
+
+<i-load-more tip="{{loadmoreTip}}" loading="{{isloading}}" hidden="{{ishidden}}" />
+
+
+
+<!-- 记一笔表单 -->
+<van-popup show="{{popupShow}}" duration="200" close-on-click-overlay="{{false}}" safe-area-inset-top="{{true}}" position="bottom" overlay="true" bind:close="popupOnClose">
+  <view class='popupTitle' style='padding:20rpx;'>
+    <van-tag bindtap="okNewBill" color="{{billTypeColor}}" size="large">
+      <van-icon name="edit" />{{billType}}</van-tag>
+    <van-icon style="float:right;" name="cross" size="40rpx" bindtap='closePopup' />
+  </view>
+  <view class='popupBillForm' style='padding:50rpx;'>
+    <van-row>
+      <van-col span="9">
+        <van-switch-cell title="收/支" size="40rpx" checked="{{ isExpend }}" bind:change="isExpendOnChange" active-color="#1989FA" inactive-color="#f44" />
+      </van-col>
+      <van-col offset="2" span="13">
+        <van-cell title="{{ currentDateStr }}" icon="calender-o" clickable="{{true}}" bind:click="openDateTimePicker" />
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col span="2">
+        <van-icon name="balance-o" size="49rpx" custom-class="custom-icon" />
+      </van-col>
+      <van-col span="9">
+        <van-tag custom-class="custom-tag" color="{{billTypeColor}}" plain size="large" bindtap="onWhereMoneyTagTap">{{whereMoney}}</van-tag>
+      </van-col>
+      <van-col span="1">
+        <view style="float:right; font-size:36rpx; margin-top: 18rpx; display:block; color:{{billTypeColor}};">{{billType=='收入'?'+':'-'}} </view>
+      </van-col>
+
+      <van-col span="12">
+        <!-- <van-cell-group> -->
+        <van-field input-class="moneyFont" value="{{ billMoney }}" input-align="center" required clearable type="digit" placeholder="金额" border="{{ true }}" left-icon="gold-coin-o" bind:change="onBillMoneyChange" />
+        <!-- </van-cell-group> -->
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col span="2">
+        <van-icon name="notes-o" size="49rpx" custom-class="custom-icon" />
+      </van-col>
+      <van-col span="22">
+        <!-- 横向滑动列表 -->
+        <scroll-view scroll-x class="scroll-x">
+          <view wx:for="{{billTypeList}}" wx:key="{{index}}" class="view-parent">
+            <view bindtap='onBillTypeItemTap' style="background: {{showIndex == index ? billTypeColor+';color:white;' : ''}};" data-selected="{{item}}" data-id="{{index}}" class="view-item">
+              {{item}}
+            </view>
+          </view>
+          <view class="view-parent">
+            <view bindtap='billTypeAdd' class="view-item">
+              <van-icon name="plus" />
+            </view>
+          </view>
+        </scroll-view>
+      </van-col>
+    </van-row>
+
+    <van-row>
+      <van-col offset="2" span="22">
+        <!-- <van-cell-group> -->
+        <van-field value="{{ billMark }}" maxlength="30" input-align="center" show-confirm-bar="{{true}}" clearable type="textarea " placeholder="备注" autosize border="{{ true }}" bind:change="onBillMarkChange" />
+        <!-- </van-cell-group> -->
+      </van-col>
+    </van-row>
+  </view>
+
+  <view style="float:right;margin:16rpx;">
+    <van-tag bindtap="okNewBill" color="{{billTypeColor}}" size="large">
+      <van-icon name="success" />确认{{billType}}</van-tag>
+  </view>
+
+</van-popup>
+
+<!-- 日期选择 -->
+<van-popup show="{{datetimePickerPopupShow}}" duration="200" position="bottom">
+  <van-datetime-picker type="date" value="{{ currentDate }}" bind:input="onDateInput" bind:confirm="onDateConfirm" bind:cancel="onDateCancle" max-date="{{ maxDate }}" formatter="{{ formatter }}" />
+</van-popup>
+
+<!-- 收支款处选择 -->
+<van-popup show="{{whereMoneyPopupShow}}" duration="200" position="bottom">
+  <van-picker show-toolbar columns="{{ whereMoneyColumns }}" bind:cancel="onCancel" bind:confirm="onConfirm" />
+</van-popup>
+<!-- 添加账单类型 -->
+<van-popup custom-style="padding:40rpx; border-radius:5%;" show="{{ billTypeAddPopupShow }}">
+  <view>
+    <van-icon name="label-o" style="margin:10rpx 0rpx;" />
+    <text style="color:#333;font-size:20rpx;">新增{{billType}}类型</text>
+  </view>
+
+  <view style='margin-top:18rpx;'>
+    <van-field input-align="center" value="{{ newBillType }}" bind:change="onNewBillTypeChange" confirm-type="完成" type="text" clearable placeholder="新类型" border="{{ true }}" />
+  </view>
+
+  <van-button bindtap='closeAddNewBillType' style="margin-top:18rpx; float:left;" size="small">
+    <van-icon name="cross" /></van-button>
+  <van-button bindtap='okAddNewBillType' style="margin-top:18rpx; float:right;" size="small" type="info">
+    <van-icon name="success" /></van-button>
+
+</van-popup>
+
+<!-- 过滤条件 -->
+<van-popup show="{{showFliterPopup}}" bind:click-overlay="closeFilterPopup" close-on-click-overlay="{{ true }}" overlay="{{ true }}" duration="200" position="top">
+  <!-- =================================================== -->  
+  <van-cell title="年份" value="*" />
+
+  <view style="align-items: center;">
+    <van-checkbox-group value="{{ yearResult }}" bind:change="onYearChange" style="border-bottom: 2rpx solid #F4F4F4;">
+      <van-checkbox style="float:left" use-icon-slot wx:for="{{ yearList }}" wx:key="index" name="{{ item }}">
+        <view class="checkgroup-item" style="{{cusArrModule.isIncludes(yearResult,item)?'background: #1989FA;color:white;':''}}">{{ item }}</view>
+      </van-checkbox>
+    </van-checkbox-group>
+  </view>
+  <!-- =================================== -->
+  <van-switch-cell title="月份" checked="{{ monthChecked }}" bind:change="onMonthCheckedChange" />
+
+  <!-- 复选框 -->
+  <view hidden="{{!monthChecked}}" style="align-items: center;">
+    <van-checkbox-group value="{{ monthResult }}" bind:change="onMonthChange" style="border-bottom: 2rpx solid #F4F4F4;">
+      <van-checkbox style="float:left" disabled="{{!monthChecked}}" use-icon-slot wx:for="{{ monthList }}" wx:key="index" name="{{ item }}">
+        <view class="checkgroup-item" style="{{cusArrModule.isIncludes(monthResult,item)?'background: #1989FA;color:white;':''}}">{{ item }}</view>
+      </van-checkbox>
+    </van-checkbox-group>
+  </view>
+  <!-- =================================== -->
+    <view style="float:right;margin:39rpx;">
+    <van-button bindtap="doFilter" type="info">筛选</van-button>
+  </view>
+</van-popup>
+
+<!-- 提示信息弹框 -->
+<van-dialog id="van-dialog" />
+
+<wxs module="cusArrModule">
+  var isIncludes = function(array, item) {
+    return array.indexOf(item) >= 0
+  }
+  module.exports.isIncludes = isIncludes;
+</wxs>

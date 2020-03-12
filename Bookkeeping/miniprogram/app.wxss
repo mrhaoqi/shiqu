@@ -1,0 +1,35 @@
+/**app.wxss**/
+
+view {
+  display: block;
+}
+
+.van-swipe-cell__right {
+  display: inline-block;
+  width: 65px;
+  height: 44px;
+  font-size: 15px;
+  line-height: 44px;
+  color: #fff;
+  text-align: center;
+  background-color: #f44;
+}
+
+.custom-icon {
+  margin-top: 20rpx;
+}
+
+.custom-tag {
+  margin-top: 18rpx;
+}
+
+/* 横着的分割View样式 */
+
+/*分割线样式*/
+
+.divLine {
+  background: #e0e3da;
+  width: 100%;
+  height: 5rpx;
+  display: block;
+}

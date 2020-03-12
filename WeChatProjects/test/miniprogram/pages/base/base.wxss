@@ -1,0 +1,14 @@
+/* pages/base/base.wxss */
+/* @import '../../style/guide.wxss'; */
+
+.box{
+  width: 200rpx;
+  height: 200rpx;
+  background-color: #ccc;
+}
+
+.child{
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #bbb;
+}

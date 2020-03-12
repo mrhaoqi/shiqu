@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-button": "vant-weapp/button",
+    "van-steps": "vant-weapp/steps",
+    "van-panel": "vant-weapp/panel"
+  }
+}

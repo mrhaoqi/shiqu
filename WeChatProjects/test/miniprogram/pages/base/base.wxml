@@ -1,0 +1,25 @@
+<!--pages/base/base.wxml-->
+<view>hello world</view>
+<view>{{msg}}</view>
+<image src="{{img}}"></image>
+<view wx:for="{{arr}}" wx:key="{{index}}">
+  {{index}} {{item}}
+</view>
+<view wx:for="{{list}}" wx:key="{{index}}">
+  {{index}} {{item.name}} {{item.age}}
+</view>
+wx if<view wx:if="{{isLogin}}">已经登录</view><view wx:else>请登录</view>
+hidden<view hidden="{{!isLogin}}">已经登录</view><view hidden='{{isLogin}}'>请登录</view>
+
+<view class="box" bindtap='onTapBoxHandler'><!-- bind不允许事件冒泡 -->
+<view class='child' bindtap='onTapChildHandler'>
+</view>
+</view>
+<text>123</text>
+<view class="box" catch:tap='onTapBoxHandler' data-id="1234"> <!-- catch不允许事件冒泡 -->
+<view class='child' catch:tap='onTapChildHandler'>
+</view>
+</view>
+
+<button size='mini' bindtap='onTapHandler'>点我加1</button>
+<view>{{countNum}}</view>

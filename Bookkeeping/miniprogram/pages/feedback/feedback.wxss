@@ -1,0 +1,14 @@
+/* miniprogram/pages/zichan/zichan.wxss */
+@import "../../app.wxss";
+.checkgroup-item {
+  width: 99rpx;
+  height: 99rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-color: #333;
+  background: #f4f4f4;
+  margin: 10px;
+}
+

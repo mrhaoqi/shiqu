@@ -1,0 +1,72 @@
+<!--miniprogram/pages/zichan/zichan.wxml-->
+<!-- 更多账单筛选条件界面 -->
+
+<wxs module="cusArrModule">
+  var isIncludes = function(array, item) {
+    return array.indexOf(item) >= 0
+  }
+  module.exports.isIncludes = isIncludes;
+</wxs>
+<!-- =================================================== -->
+<van-panel title="年份">
+  <view>
+    <van-picker columns="{{ yearColumns }}" default-index="{{yearColumns.length-1}}" item-height="44" visible-item-count="1" bind:change="onYearChange" />
+  </view>
+</van-panel>
+<!-- =================================== -->
+<van-switch-cell title="月份" checked="{{ monthChecked }}" bind:change="onMonthCheckedChange" />
+
+<!-- 复选框 -->
+<view hidden="{{!monthChecked}}" style="align-items: center;">
+  <van-checkbox-group value="{{ monthResult }}" bind:change="onMonthChange" style="border-bottom: 2rpx solid #F4F4F4;">
+    <van-checkbox style="float:left" disabled="{{!monthChecked}}" use-icon-slot wx:for="{{ monthList }}" wx:key="index" name="{{ item }}">
+      <view class="checkgroup-item" style="{{cusArrModule.isIncludes(monthResult,item)?'background: #1989FA;color:white;':''}}">{{ item }}月</view>
+    </van-checkbox>
+  </van-checkbox-group>
+</view>
+<!-- =================================== -->
+
+<view>
+  <van-switch-cell title="收支账户" checked="{{ accountChecked }}" bind:change="onAccountCheckedChange" />
+</view>
+<!-- 复选框 -->
+<view hidden="{{!accountChecked}}" style="align-items: center;">
+  <van-checkbox-group value="{{ accountResult }}" bind:change="onAccountChange" style="border-bottom: 2rpx solid #F4F4F4;">
+    <van-checkbox style="float:left" disabled="{{!accountChecked}}" use-icon-slot wx:for="{{ accountList }}" wx:key="index" name="{{ item }}">
+      <view class="checkgroup-item" style="{{cusArrModule.isIncludes(accountResult,item)?'background: #1989FA;color:white;':''}}">{{ item }}</view>
+    </van-checkbox>
+  </van-checkbox-group>
+</view>
+
+<!-- =================================== -->
+
+<view>
+  <van-switch-cell title="支出类型" checked="{{ outMoneyChecked }}" bind:change="onOutMoneyCheckedChange" />
+</view>
+<!-- 复选框 -->
+<view hidden="{{!outMoneyChecked}}" style="align-items: center;">
+  <van-checkbox-group value="{{ outMoneyResult }}" bind:change="onOutMoneyChange" style="border-bottom: 2rpx solid #F4F4F4;">
+    <van-checkbox style="float:left" disabled="{{!outMoneyChecked}}" use-icon-slot wx:for="{{ outMoneyList }}" wx:key="index" name="{{ item }}">
+      <view class="checkgroup-item" style="{{cusArrModule.isIncludes(outMoneyResult,item)?'background: #1989FA;color:white;':''}}">{{ item }}</view>
+    </van-checkbox>
+  </van-checkbox-group>
+</view>
+<!-- =================================== -->
+
+<view>
+  <van-switch-cell title="收入类型" checked="{{ inMoneyChecked }}" bind:change="onInMoneyCheckedChange" />
+</view>
+<!-- 复选框 -->
+<view hidden="{{!inMoneyChecked}}" style="align-items: center;">
+  <van-checkbox-group value="{{ inMoneyResult }}" bind:change="onInMoneyChange" style="border-bottom: 2rpx solid #F4F4F4;">
+    <van-checkbox style="float:left" disabled="{{!inMoneyChecked}}" use-icon-slot wx:for="{{ inMoneyList }}" wx:key="index" name="{{ item }}">
+      <view class="checkgroup-item" style="{{cusArrModule.isIncludes(inMoneyResult,item)?'background: #1989FA;color:white;':''}}">{{ item }}</view>
+    </van-checkbox>
+  </van-checkbox-group>
+</view>
+<!-- -=================================== -->
+
+
+  <view style="float:right;margin:39rpx;">
+    <van-button bindtap="doFilter" type="info">筛选</van-button>
+  </view>

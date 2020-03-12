@@ -1,0 +1,21 @@
+<!--pages/cloud/cloud.wxml-->
+<button type='primary' bindtap='insertdata'>插入数据</button>
+<view>-----</view>
+<button type='primary' bindtap='deletedata'>删除数据</button>
+<view>-----</view>
+<button type='primary' bindtap='updatedata'>修改数据</button>
+<view>-----</view>
+<button type='primary' bindtap='selectdata'>查询数据</button>
+<view>-----</view>
+<button type='primary' bindtap='runsum'>调用云函数sum</button>
+<view>-----</view>
+<button type='primary' bindtap='getCurUserOpenID'>获取当前用户的openID</button>
+<view>-----</view>
+<button type='primary' bindtap='batchDelete'>批量删除20的李红</button>
+<view>-----</view>
+<button type='primary' bindtap='uploadImg'>上传图片</button>
+<button type='primary' bindtap='getImg'>展示图片</button>
+<block wx:for="{{images}}" wx:key="{{index}}">
+<image src="{{item.fileID}}"></image>
+<button size='mini' data-fileid="{{item.fileID}}" type='primary' bindtap='downloadImg'>下载</button>
+</block>

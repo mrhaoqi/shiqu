@@ -1,0 +1,116 @@
+<!--miniprogram/pages/shezhi/shezhi.wxml-->
+<view class="userinfo">
+  <view class="userinfo-avatar">
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+  <open-data type="userNickName"></open-data>
+</view>
+
+
+<van-collapse value="{{ activeNames }}" accordion="{{true}}" bind:change="onChange">
+  <van-collapse-item title="分享、建议、打侃" name="5" icon="smile-comment-o">
+    <van-cell>
+      <view slot="title">
+        <button hover-class="cus_cell_title" style="font-size:14px;" open-type='share'>分享程序</button>
+      </view>
+    </van-cell>
+    <van-cell>
+      <view slot="title">
+        <button hover-class="cus_cell_title" style="font-size:14px;" open-type='feedback'>意见反馈</button>
+      </view>
+    </van-cell>
+    <van-cell>
+      <view slot="title">
+        <button hover-class="cus_cell_title" style="font-size:14px;" open-type='contact'>联系客服</button>
+      </view>
+    </van-cell>
+
+  </van-collapse-item>
+
+
+  <van-collapse-item title="账户资产" name="1" icon="balance-o">
+    <van-cell title-class="cus_cell_title" data-creditaccount="account" bind:click="whereMoneyAdd" title="+添加账户资产" />
+
+    <van-swipe-cell id="swipe-cell" right-width="{{ 65 }}" async-close bind:close="onClose" wx:for="{{whereMoneyAccountColumns}}" wx:key="{{index}}">
+      <van-cell title="{{item.accountName}}" value="￥{{item.accountMoney}}" />
+      <view slot="right" data-id="{{item._id}}" bindtap="deleteAccount" class="van-swipe-cell__right">删除</view>
+    </van-swipe-cell>
+
+  </van-collapse-item>
+
+  <van-collapse-item title="信用资产" name="2" icon="gold-coin-o">
+    <van-cell title-class="cus_cell_title" data-creditaccount="credit" bind:click="whereMoneyAdd" title="+添加信用资产" />
+
+    <van-swipe-cell id="swipe-cell" right-width="{{ 65 }}" async-close bind:close="onClose" wx:for="{{whereMoneyCreditColumns}}" wx:key="{{index}}">
+      <van-cell title="{{item.accountName}}" value="￥{{item.accountMoney}}" />
+      <view slot="right" data-id="{{item._id}}" bindtap="deleteCredit" class="van-swipe-cell__right">删除</view>
+    </van-swipe-cell>
+
+  </van-collapse-item>
+
+  <van-collapse-item title="支出类型" name="3" icon="cash-back-record">
+    <van-cell clickable data-inout="out" title-class="cus_cell_title" bind:click="billTypeAdd" title="+添加支出类型" />
+
+    <van-swipe-cell id="swipe-cell" right-width="{{ 65 }}" async-close bind:close="onClose" wx:for="{{outBillTypeList}}" wx:key="{{index}}">
+      <van-cell title="{{item.billTypeName}}" title-class="cus_cell_title font-color-333" />
+      <view slot="right" data-id="{{item._id}}" data-inout="out" bindtap="deleteBillType" class="van-swipe-cell__right">删除</view>
+    </van-swipe-cell>
+
+  </van-collapse-item>
+
+  <van-collapse-item title="收入类型" name="4" icon="refund-o">
+    <van-cell clickable data-inout="in" title-class="cus_cell_title" bind:click="billTypeAdd" title="+添加收入类型" />
+
+    <van-swipe-cell id="swipe-cell" right-width="{{ 65 }}" async-close bind:close="onClose" wx:for="{{inBillTypeList}}" wx:key="{{index}}">
+      <van-cell title="{{item.billTypeName}}" title-class="cus_cell_title font-color-333" />
+      <view slot="right" data-id="{{item._id}}" data-inout="in" bindtap="deleteBillType" class="van-swipe-cell__right">删除</view>
+    </van-swipe-cell>
+
+  </van-collapse-item>
+
+</van-collapse>
+
+<van-cell icon="info-o" is-link title="帮助" link-type="navigateTo" url="../index/index" />
+
+
+<!-- 添加账单类型 -->
+<van-popup custom-style="padding:40rpx; border-radius:5%;" show="{{ billTypeAddPopupShow }}">
+  <view>
+    <van-icon name="label-o" style="margin:10rpx 0rpx;" />
+    <text style="color:#333;font-size:20rpx;">新增{{inOut}}类型</text>
+  </view>
+
+  <view style='margin-top:18rpx;'>
+    <van-field input-align="center" value="{{ newBillType }}" bind:change="onNewBillTypeChange" confirm-type="完成" type="text" clearable placeholder="新类型" border="{{ true }}" />
+  </view>
+
+  <van-button bindtap='closeAddNewBillType' style="margin-top:18rpx; float:left;" size="small">
+    <van-icon name="cross" /></van-button>
+  <van-button bindtap='okAddNewBillType' style="margin-top:18rpx; float:right;" size="small" type="info">
+    <van-icon name="success" /></van-button>
+
+</van-popup>
+
+
+<!-- 添加账户资产或信用资产 -->
+<van-popup custom-style="padding:40rpx; border-radius:5%;" show="{{ whereMoneyAddPopupShow }}">
+  <view>
+    <van-icon name="label-o" style="margin:10rpx 0rpx;" />
+    <text style="color:#333;font-size:20rpx;">新增{{creditAccount=='credit'?'信用':'账户'}}资产</text>
+  </view>
+
+  <view>
+    <van-field input-align="center" value="{{ whereMoneyWhere }}" required border="{{true}}" bind:change="onNewWhereMoneyWhereChange" confirm-type="完成" type="text" clearable placeholder="账户名称" />
+  </view>
+  <view style="margin-top:18rpx;">
+    <van-field input-align="center" value="{{ whereMoneyMoney }}" border="{{true}}" bind:change="onNewWhereMoneyMoneyChange" confirm-type="完成" type="digit" clearable placeholder="{{creditAccount=='credit'?'信用额度':'账户余额'}}" />
+  </view>
+
+  <van-button bindtap='closeAddWhereMoney' style="margin-top:18rpx; float:left;" size="small">
+    <van-icon name="cross" /></van-button>
+  <van-button bindtap='okAddWhereMoney' style="margin-top:18rpx; float:right;" size="small" type="info">
+    <van-icon name="success" /></van-button>
+
+</van-popup>
+<!-- 提示信息弹框 -->
+<van-dialog id="van-dialog" />

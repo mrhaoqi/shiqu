@@ -1,0 +1,6 @@
+<!--miniprogram/pages/help/help.wxml-->
+<van-steps steps="{{[{text: '1、当天的账单可以再首页修改，更多明细中的账单无法修改；',desc: '点击备注信息可以查看完整备注'},{text: '2、首页可以查看当月收支，点击“含欠款”可以查看欠款；',desc: '例如：XX信用卡~￥1200 '},{text: '3、更多明细中可以年、月查看账单列表；',desc: '点击备注信息可以查看完整备注'},{text: '4、个人中心设置中所有列表只能新增、或者删除；',desc: '要修改的话就先删除再新增吧 :-)'},{text: '5、账户资产-就是你自己的钱、信用资产-就是需要还的钱；',desc: '资产额度可以不用写，毕竟没有太多钱 :-) '}]}}"
+    active="{{ active }}" direction="vertical" active-color="#f44" />
+<button bindtap="nextStep">下一步</button>
+
+<official-account></official-account>
